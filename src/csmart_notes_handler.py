@@ -12,7 +12,12 @@ class SmartNotesHandler:
 
 	def _execute_prompt(self, prompt, note):
 		print('    Результат: (пока что нету. код еще не дописал)')
+		prompt_text = self._read_file_from_data(prompt)
+		note_text = self._read_file_from_data(note)
 	
 	def _read_file_from_data(self, file_name):
-		pass
+		f = open(f'data/{file_name}')
+		data = f.read()
+		f.close()
+		return data
 

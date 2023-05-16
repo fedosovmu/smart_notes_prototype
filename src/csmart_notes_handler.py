@@ -1,5 +1,6 @@
 import os
 import openai
+import json
 
 
 class SmartNotesHandler:
@@ -15,8 +16,8 @@ class SmartNotesHandler:
 	def _execute_prompt(self, prompt, note):
 		prompt_text = self._read_file_from_data(prompt)
 		note_text = self._read_file_from_data(note)
-		result = self._send_request(prompt_text, note_text)
-		print(f'    Результат: {result}')
+		server_answer = self._send_request(prompt_text, note_text)
+		self._analyze_result(server_answer)
 	
 	def _read_file_from_data(self, file_name):
 		f = open(f'data/{file_name}')
@@ -35,10 +36,15 @@ class SmartNotesHandler:
 		    {"role": "user", "content": note}
 		  ]
 		)
+		server_answer = completion.choices[0].message
+		print(f'    Ответ сервера {server_answer}')
+		return server_answer
 
-		print('    Ответ сервера')
-		result = completion.choices[0].message
-		print(result)
-
-		
-		return '(Код анализирующий результат еще не готов)'
+	def _analyze_result(self, server_answer):
+		print('    Анализирую результат')
+		content = server_answer['content']
+		events = json.loads(content)
+		print('    Распознанные события:')
+		for event in events:
+			print(f'      - "{event}"')
+		print('    Успех')

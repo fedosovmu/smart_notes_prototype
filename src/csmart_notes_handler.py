@@ -12,6 +12,7 @@ class SmartNotesHandler:
 			for note in notes:
 				print(f'  - Анализирую заметку «{note}»')
 				self._execute_prompt(prompt, note)
+		print('=== Конец скрипта ===')
 
 	def _execute_prompt(self, prompt, note):
 		prompt_text = self._read_file_from_data(prompt)
@@ -28,23 +29,29 @@ class SmartNotesHandler:
 	def _send_request(self, prompt, note):
 		openai.api_key = os.getenv("API_KEY")
 		organization = os.getenv("ORGANIZATION")
-		
-		completion = openai.ChatCompletion.create(
-		  model="gpt-3.5-turbo",
-		  messages=[
-		  	{"role": "user", "content": prompt},
-		    {"role": "user", "content": note}
-		  ]
-		)
-		server_answer = completion.choices[0].message
-		print(f'    Ответ сервера {server_answer}')
-		return server_answer
+
+		try:
+			completion = openai.ChatCompletion.create(
+			  model="gpt-3.5-turbo",
+			  messages=[
+			  	{"role": "user", "content": prompt},
+			    {"role": "user", "content": note}
+			  ]
+			)
+			server_answer = completion.choices[0].message
+			#print(f'    Ответ сервера {server_answer}')
+			return server_answer
+		except:
+			print('    Ошибка. Проблемы при отправке запроса на сервер')
+		return None
 
 	def _analyze_result(self, server_answer):
-		print('    Анализирую результат')
 		content = server_answer['content']
-		events = json.loads(content)
-		print('    Распознанные события:')
-		for event in events:
-			print(f'      - "{event}"')
-		print('    Успех')
+		try:
+			events = json.loads(content)
+			print('    Распознанные события:')
+			for event in events:
+				print(f'      - "{event}"')
+		except:
+			print('    Ошибка. Не удалось распознать результат')
+			print(f'    «Ответ сервера {content}»')

@@ -11,7 +11,7 @@ class SmartNotesHandler:
 				self._execute_prompt(prompt, note)
 
 	def _execute_prompt(self, prompt, note):
-		print('    Результат: Not implemented')
+		print('    Результат: (пока что нету. код еще не дописал)')
 	
 	def _read_file_from_data(self, file_name):
 		pass

@@ -5,14 +5,14 @@ import json
 
 class SmartNotesHandler:
 	def execute(self, prompts, notes):
-		print('=== Запускаю скрипт ===')
+		print('====== Запускаю скрипт ======')
 
 		for prompt in prompts:
 			print(f'Выполняю промт «{prompt}»')
 			for note in notes:
 				print(f'  - Анализирую заметку «{note}»')
 				self._execute_prompt(prompt, note)
-		print('=== Конец скрипта ===')
+		print('====== Конец скрипта ======')
 
 	def _execute_prompt(self, prompt, note):
 		prompt_text = self._read_file_from_data(prompt)
@@ -46,6 +46,8 @@ class SmartNotesHandler:
 		return None
 
 	def _analyze_result(self, server_answer):
+		if server_answer is None:
+			return
 		content = server_answer['content']
 		try:
 			events = json.loads(content)
@@ -54,4 +56,7 @@ class SmartNotesHandler:
 				print(f'      - "{event}"')
 		except:
 			print('    Ошибка. Не удалось распознать результат')
-			print(f'    «Ответ сервера {content}»')
+			print(f'    Ответ сервера:')
+			print('=== Начало ответа ===')
+			print(content)
+			print('=== Конец ответа ===')

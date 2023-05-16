@@ -1,5 +1,10 @@
+from src.csmart_notes_handler import SmartNotesHandler
 
+if __name__ == '__main__':
+	# файлики с промтами
+	prompts = ['prompt_1.txt']
+	# файлики с заметками
+	notes = ['note_1.txt', 'note_2.txt', 'note_3.txt']
 
-
-print('Hello world')
-
+	# Выполняю запросы для всех комбинаций промтов и заметок
+	SmartNotesHandler().execute(prompts, notes)

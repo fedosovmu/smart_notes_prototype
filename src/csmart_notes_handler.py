@@ -1,4 +1,5 @@
 import os
+import openai
 
 
 class SmartNotesHandler:
@@ -12,10 +13,10 @@ class SmartNotesHandler:
 				self._execute_prompt(prompt, note)
 
 	def _execute_prompt(self, prompt, note):
-		print('    Результат: (пока что нету. код еще не дописал)')
 		prompt_text = self._read_file_from_data(prompt)
 		note_text = self._read_file_from_data(note)
 		result = self._send_request(prompt_text, note_text)
+		print(f'    Результат: {result}')
 	
 	def _read_file_from_data(self, file_name):
 		f = open(f'data/{file_name}')
@@ -24,5 +25,20 @@ class SmartNotesHandler:
 		return data
 
 	def _send_request(self, prompt, note):
-		api_key = os.getenv("TEST_SECRET")
+		openai.api_key = os.getenv("API_KEY")
+		organization = os.getenv("ORGANIZATION")
+		
+		completion = openai.ChatCompletion.create(
+		  model="gpt-3.5-turbo",
+		  messages=[
+		  	{"role": "user", "content": prompt},
+		    {"role": "user", "content": note}
+		  ]
+		)
 
+		print('    Ответ сервера')
+		result = completion.choices[0].message
+		print(result)
+
+		
+		return '(Код анализирующий результат еще не готов)'

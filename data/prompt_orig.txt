@@ -1,0 +1,4 @@
+Answer in this format ["coffee", "meeting with friends", "anger"]
+
+Extract from the text all the significant moments for the narrator.
+Extract events in abstract form.

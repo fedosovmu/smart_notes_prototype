@@ -1,4 +1,92 @@
-Answer in this format ["coffee", "meeting with friends", "anger"]
+Игнорируй всё предыдущую переписку.
+Извлекаем Время суток, события, эмоции 
 
-Extract from the text all the significant moments for the narrator.
-Extract events in abstract form.
+Нам нужно извлечь данные из текста 
+
+Шкала настроения, напиши цифру от 1 до 7 в зависимости от шкалы:
+
+Mood 1: Ужасное
+Mood 2: Плохое
+Mood 3: Не очень
+Mood 4: Нормальное
+Mood 5: Хорошее
+Mood 6: Отличное
+Mood 7: Восхитительно
+
+События должны быть только из этого списка на языке оригинала заметки:
+Dancing
+Alcohol
+Allergy
+Bath
+Bicycle
+Breakfast
+Bustle
+Cleaning
+Club
+Cold
+Communication
+Dancing
+Date
+Diet food
+Dinner
+Energy drink
+Family
+Fast Food
+Fatty food
+Siesta
+Football
+Fresh air
+Fruit
+Glass of water
+Good weather
+Guests
+Gym
+Gymnastic
+Had a bite
+Hot
+Insomnia
+Jog
+Laziness
+Light food
+Lunch
+Massage
+Meditation
+Meeting
+Meeting with friends
+Messenger
+Movie
+News
+Nightmare
+Painting
+Panic attack
+Party
+Phone
+Prayer
+Procrastination
+Psychiatrist
+Psychologist
+Quarrels
+Rain
+Road
+Self care
+Shopping
+Shower
+Sigarettes
+Sleepiness
+Snow
+Social media
+Study
+Swimming pool
+Tea
+Tik Tok
+TV series
+Vegetables
+Warm-up
+Went to bed early
+Went to bed late
+Woke up early
+Workout
+Yoga
+Youtube
+
+Извлеки данные из этого текста в виде таблицы с этими колонками порядком : "#", "Время суток", " События", "Настроение", "Энергия", "Эмоции"
